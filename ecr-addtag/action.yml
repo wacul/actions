@@ -1,0 +1,36 @@
+name: tag ecr
+description: put tag to aws ecr
+inputs:
+  key:
+    description: 'AWS Access Key ID'
+    required: true
+  secret:
+    description: 'AWS Secret Access Key'
+    required: true
+  region:
+    description: 'Region name (default: us-east-1)'
+    required: false
+    default: us-east-1
+  registory-id:
+    description: 'AWS account ID associated with the registry'
+    required: true
+  repository:
+    description: 'ECR repository'
+    required: true
+  source-tag:
+    description: 'The source tag'
+    required: true
+  add-tag:
+    description: 'Tags to add to the source tag'
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - --key ${{ inputs.key }}
+    - --secret ${{ inputs.secret }}
+    - --region ${{ inputs.region }}
+    - --registory-id ${{ inputs.registory-id }}
+    - --repository ${{ inputs.repository }}}
+    - --source-tag ${{ inputs.source-tag }}
+    - --add-tag ${{ inputs.add-tag }}
