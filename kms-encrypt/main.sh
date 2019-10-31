@@ -23,11 +23,11 @@ do
 done
 
 if [[ -z "$FILE" ]]; then
-  echo "暗号化する対象ファイルを指定してください"
+  echo "It must be called with `-f <FILE TO ENCRYPT>`"
   usage
 fi
 if [[ -z "$KEY_ALIAS" ]]; then
-  echo "KMSのエイリアスを指定してください"
+  echo "It must be called with `-k <KMS ALIAS>`"
   usage
 fi
 
