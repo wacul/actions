@@ -1,0 +1,15 @@
+name: kms encrypt
+description: aws kms encrypt
+inputs:
+  file:
+    description: 'encrypt file path'
+    required: true
+  key-alias:
+    description: 'kms key alias'
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - -f ${{ inputs.file }}
+    - -k ${{ inputs.key-alias }}
