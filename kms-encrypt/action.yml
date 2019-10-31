@@ -4,7 +4,7 @@ inputs:
   file:
     description: 'encrypt file path'
     required: true
-  key-alias:
+  kms-key-alias:
     description: 'kms key alias'
     required: true
 runs:
@@ -12,4 +12,4 @@ runs:
   image: 'Dockerfile'
   args:
     - -f ${{ inputs.file }}
-    - -k ${{ inputs.key-alias }}
+    - -k ${{ inputs.kms-key-alias }}

@@ -1,7 +1,7 @@
 name: kms decrypt
 description: aws kms decrypt All files named *.encrypted
 inputs:
-  key-alias:
+  kms-key-alias:
     description: 'kms key alias'
     required: true
 runs:
@@ -9,4 +9,4 @@ runs:
   image: 'Dockerfile'
   args:
     - -a
-    - -k ${{ inputs.key-alias }}
+    - -k ${{ inputs.kms-key-alias }}
