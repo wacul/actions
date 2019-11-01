@@ -4,4 +4,4 @@ WORKDIR /code/
 
 ADD main.sh main.sh
 
-ENTRYPOINT ["bash", "main.sh"]
+ENTRYPOINT ["bash", "/code/main.sh"]
