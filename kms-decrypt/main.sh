@@ -28,9 +28,9 @@ set -e
 if [[ "${ALL_FILE}" -eq 1 ]]; then
   find ./ -type f -name '*.encrypted' | while read -r ENCRYPTED_FILE; do
     RAW_FILE=${ENCRYPTED_FILE%.encrypted}
-    aws kms decrypt --ciphertext-blob "fileb://${ENCRYPTED_FILE}" --query Plaintext --output text | base64 --decode > "${RAW_FILE}"
+    aws kms decrypt --ciphertext-blob "fileb://${ENCRYPTED_FILE}" --query Plaintext --output text | base64 -d > "${RAW_FILE}"
   done
 else
   RAW_FILE=${FILE%.encrypted}
-  aws kms decrypt --ciphertext-blob "fileb://{FILE}" --query Plaintext --output text | base64 --decode > "${RAW_FILE}"
+  aws kms decrypt --ciphertext-blob "fileb://${FILE}" --query Plaintext --output text | base64 -d > "${RAW_FILE}"
 fi
