@@ -18,8 +18,8 @@ do
   esac
 done
 
-if [[ -z "$FILE" ]] || [[ -z "$ALL_FILE" ]]; then
-  echo "It must be called with `-f <ENCRYPTED FILE>` or `-a`"
+if [[ -z "$FILE" ]] && [[ -z "$ALL_FILE" ]]; then
+  echo "It must be called with \`-f <ENCRYPTED FILE>\` or \`-a\`"
   usage
 fi
 

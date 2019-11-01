@@ -23,11 +23,11 @@ do
 done
 
 if [[ -z "$FILE" ]]; then
-  echo "It must be called with `-f <FILE TO ENCRYPT>`"
+  echo "It must be called with \`-f <FILE TO ENCRYPT>\`"
   usage
 fi
 if [[ -z "$KEY_ALIAS" ]]; then
-  echo "It must be called with `-k <KMS ALIAS>`"
+  echo "It must be called with \`-k <KMS ALIAS>\`"
   usage
 fi
 
