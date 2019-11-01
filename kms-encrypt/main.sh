@@ -36,4 +36,4 @@ ENCRYPTED_FILE="${FILE}.encrypted"
 
 set -e
 
-aws kms encrypt --key-id "alias/${KEY_ALIAS}" --plaintext "fileb://${FILE}" --output text --query CiphertextBlob | base64 --decode > "${ENCRYPTED_FILE}"
+aws kms encrypt --key-id "alias/${KEY_ALIAS}" --plaintext "fileb://${FILE}" --output text --query CiphertextBlob | base64 -d > "${ENCRYPTED_FILE}"
