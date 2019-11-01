@@ -3,16 +3,15 @@
 
 CMDNAME=`basename $0`
 usage() {
-  echo "Usage: $CMDNAME [-a or [-f FILE]] [-k KEY_ALIAS]" 1>&2
+  echo "Usage: $CMDNAME [-a or [-f FILE]]" 1>&2
   exit 1
 }
 
-while getopts af:k: OPT
+while getopts af: OPT
 do
   case $OPT in
     "a") ALL_FILE=1;;
     "f") FILE="$OPTARG";;
-    "k") KEY_ALIAS="$OPTARG";;
     * )
       usage
       exit 1 ;;
@@ -21,10 +20,6 @@ done
 
 if [[ -z "$FILE" ]] || [[ -z "$ALL_FILE" ]]; then
   echo "It must be called with `-f <ENCRYPTED FILE>` or `-a`"
-  usage
-fi
-if [[ -z "$KEY_ALIAS" ]]; then
-  echo "It must be called with `-k <KMS ALIAS>`"
   usage
 fi
 
