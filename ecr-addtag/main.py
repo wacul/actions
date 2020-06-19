@@ -2,6 +2,7 @@
 import argparse
 import logging
 import sys
+import os
 from botocore.exceptions import ClientError
 from boto3 import Session
 
@@ -33,15 +34,29 @@ class AwsUtils(object):
             else:
                 raise
 
+
+class EnvDefault(argparse.Action):
+    def __init__(self, envvar, required=True, default=None, **kwargs):
+        if not default and envvar:
+            if envvar in os.environ:
+                default = os.environ[envvar]
+        if required and default:
+            required = False
+        super(EnvDefault, self).__init__(default=default, required=required, **kwargs)
+
+    def __call__(self, parser, namespace, values, option_string=None):
+        setattr(namespace, self.dest, values)
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='ecr add tag')
-    parser.add_argument('--key', default="")
-    parser.add_argument('--secret', default="")
-    parser.add_argument('--region', default='us-east-1')
-    parser.add_argument('--registory-id', default='', required=True)
-    parser.add_argument('--repository', default='', required=True)
-    parser.add_argument('--source-tag', default='', required=True)
-    parser.add_argument('--add-tag', default='', required=True)
+    parser.add_argument('--key', action=EnvDefault, envvar='AWS_ACCESS_KEY_ID')
+    parser.add_argument('--secret', action=EnvDefault, envvar='AWS_SECRET_KEY')
+    parser.add_argument('--region', default='us-east-1', action=EnvDefault, envvar='AWS_DEFAULT_REGION')
+    parser.add_argument('--registory-id', required=True, action=EnvDefault, envvar='AWS_REGISTORY_ID')
+    parser.add_argument('--repository', required=True, action=EnvDefault, envvar='REPOSITORY_NAME')
+    parser.add_argument('--source-tag', required=True, action=EnvDefault, envvar='SOURCE_TAG')
+    parser.add_argument('--add-tag', required=True, action=EnvDefault, envvar='ADD_TAG')
     argp = parser.parse_args()
     
     awsutils = AwsUtils(access_key=argp.key, secret_key=argp.secret, region=argp.region)
