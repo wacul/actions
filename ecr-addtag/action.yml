@@ -11,7 +11,7 @@ inputs:
     description: 'Region name (default: us-east-1)'
     required: false
     default: us-east-1
-  registory-id:
+  registry-id:
     description: 'AWS account ID associated with the registry'
     required: true
   repository:
@@ -26,11 +26,11 @@ inputs:
 runs:
   using: 'docker'
   image: 'Dockerfile'
-  args:
-    - --key ${{ inputs.key }}
-    - --secret ${{ inputs.secret }}
-    - --region ${{ inputs.region }}
-    - --registory-id ${{ inputs.registory-id }}
-    - --repository ${{ inputs.repository }}}
-    - --source-tag ${{ inputs.source-tag }}
-    - --add-tag ${{ inputs.add-tag }}
+  env:
+    AWS_ACCESS_KEY_ID: ${{ inputs.key }}
+    AWS_SECRET_ACCESS_KEY: ${{ inputs.secret }}
+    AWS_DEFAULT_REGION: ${{ inputs.region }}
+    AWS_REGISTRY_ID: ${{ inputs.registry-id }}
+    REPOSITORY_NAME: ${{ inputs.repository }}
+    SOURCE_TAG: ${{ inputs.source-tag }}
+    ADD_TAG: ${{ inputs.add-tag }}
