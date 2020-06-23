@@ -31,6 +31,6 @@ runs:
     AWS_SECRET_ACCESS_KEY: ${{ inputs.secret }}
     AWS_DEFAULT_REGION: ${{ inputs.region }}
     AWS_REGISTRY_ID: ${{ inputs.registry-id }}
-    REPOSITORY_NAME: ${{ inputs.repository }}}
+    REPOSITORY_NAME: ${{ inputs.repository }}
     SOURCE_TAG: ${{ inputs.source-tag }}
     ADD_TAG: ${{ inputs.add-tag }}
