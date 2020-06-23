@@ -11,7 +11,7 @@ inputs:
     description: 'Region name (default: us-east-1)'
     required: false
     default: us-east-1
-  registory-id:
+  registry-id:
     description: 'AWS account ID associated with the registry'
     required: true
   repository:
@@ -30,7 +30,7 @@ runs:
     AWS_ACCESS_KEY_ID: ${{ inputs.key }}
     AWS_SECRET_ACCESS_KEY: ${{ inputs.secret }}
     AWS_DEFAULT_REGION: ${{ inputs.region }}
-    AWS_REGISTORY_ID: ${{ inputs.registory-id }}
+    AWS_REGISTRY_ID: ${{ inputs.registry-id }}
     REPOSITORY_NAME: ${{ inputs.repository }}}
     SOURCE_TAG: ${{ inputs.source-tag }}
     ADD_TAG: ${{ inputs.add-tag }}
