@@ -13,8 +13,8 @@ logger.setLevel(logging.INFO)
 
 
 class AwsUtils(object):
-    def __init__(self, access_key, secret_key, region='us-east-1'):
-        session = Session(aws_access_key_id=access_key, aws_secret_access_key=secret_key, region_name=region)
+    def __init__(self):
+        session = Session()
         self.ecr = session.client('ecr')
 
     def get_image_manifest(self, registry_id: str, repository: str, source_tag: str) -> str:
@@ -50,15 +50,12 @@ class EnvDefault(argparse.Action):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='ecr add tag')
-    parser.add_argument('--key', action=EnvDefault, envvar='AWS_ACCESS_KEY_ID')
-    parser.add_argument('--secret', action=EnvDefault, envvar='AWS_SECRET_ACCESS_KEY')
-    parser.add_argument('--region', default='us-east-1', action=EnvDefault, envvar='AWS_DEFAULT_REGION')
     parser.add_argument('--registry-id', required=True, action=EnvDefault, envvar='AWS_REGISTRY_ID')
     parser.add_argument('--repository', required=True, action=EnvDefault, envvar='REPOSITORY_NAME')
     parser.add_argument('--source-tag', required=True, action=EnvDefault, envvar='SOURCE_TAG')
     parser.add_argument('--add-tag', required=True, action=EnvDefault, envvar='ADD_TAG')
     argp = parser.parse_args()
     
-    awsutils = AwsUtils(access_key=argp.key, secret_key=argp.secret, region=argp.region)
+    awsutils = AwsUtils(region=argp.region)
     image_manifest = awsutils.get_image_manifest(registry_id=argp.registry_id, repository=argp.repository, source_tag=argp.source_tag)
     awsutils.add_tag(registry_id=argp.registry_id, repository=argp.repository, add_tag=argp.add_tag, image_manifest=image_manifest)
