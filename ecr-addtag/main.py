@@ -56,6 +56,6 @@ if __name__ == '__main__':
     parser.add_argument('--add-tag', required=True, action=EnvDefault, envvar='ADD_TAG')
     argp = parser.parse_args()
     
-    awsutils = AwsUtils(region=argp.region)
+    awsutils = AwsUtils()
     image_manifest = awsutils.get_image_manifest(registry_id=argp.registry_id, repository=argp.repository, source_tag=argp.source_tag)
     awsutils.add_tag(registry_id=argp.registry_id, repository=argp.repository, add_tag=argp.add_tag, image_manifest=image_manifest)
