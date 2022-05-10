@@ -1,4 +1,4 @@
-FROM wacul/awscli:latest
+FROM ghcr.io/wacul/awscli:latest
 
 WORKDIR /code/
 
